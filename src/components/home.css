@@ -1,0 +1,97 @@
+.home {
+ width: 100%;
+ background-image: var(--main-bg-img);
+ background-repeat: no-repeat;
+ display: grid;
+ grid-template-columns: 50% 50%;
+ background-position: center bottom;
+ overflow-X: hidden;
+ overflow-Y: hidden;
+ box-sizing: border-box;
+ padding: 2%;
+ background-size: cover;
+ padding-bottom: 40vh;
+ z-index: 1;
+}
+
+article {
+font-family: var(--min-font);
+font-size: 1.5em;
+background: none;
+}
+
+article > h1 {
+font-family: var(--maj-font);
+font-size: 1.8em;
+}
+
+.signup-but {
+background: none;
+font-family: 'Bebas Neue', cursive;
+border-radius: 5px;
+padding: 2%;
+box-shadow: 0px 0px 5px gray;
+font-size: 1.3em;
+border: none;
+min-width: 150px;
+max-width: 400px;
+min-width: 20%;
+display: block;
+position: relative;	
+background: white;
+margin: auto;
+}
+
+.home > section {
+ margin-top: 10vmin; 
+ width: 100%;
+ display: relative;
+ background: none;
+ display: inline-block;
+}
+
+.graph {
+perspective: 200px;
+perspective-origin: center center;
+}
+
+.graph > div {
+background: white;
+transform: scale(2) rotateY(-10deg) translateX(25%);
+padding: 2%;
+box-shadow: 0px 0px 5px gray;
+border-radius: 5px;
+animation: rotateD 10s linear infinite;
+width: 100%;
+top: calc(50% - 12.5vw); 
+position: relative;
+}
+
+@keyframes rotateD {
+0% {
+ transform: scale(1.7) rotateY(-10deg) translateX(25%);
+}
+50% {
+transform: scale(1.7) rotateY(-5deg) translateX(25%);
+}
+100% {
+transform: scale(1.7) rotateY(-10deg) translateX(25%);
+}
+}
+
+@keyframes rotateM {
+0% {
+ transform: scale(1.2) rotateY(-10deg) translateX(25%);
+}
+50% {
+transform: scale(1.2) rotateY(-5deg) translateX(25%);
+}
+100% {
+transform: scale(1.2) rotateY(-10deg) translateX(25%);
+}
+}
+
+.intro > article {
+text-align: center;
+}
+
