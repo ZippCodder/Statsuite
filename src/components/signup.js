@@ -1,26 +1,72 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import {Link} from "react-router-dom";
+import {Link,useHistory} from "react-router-dom";
 import "./signup.css";
+import {GlobalContext} from "./globalcontext.js";
+import logo from "../logo.svg";
+
+const {useState,useRef,useEffect,useContext} = React;
 
 export default function Signup(props) {
+
+    const [loading,setLoading] = useState(false);
+     const [error,setError] = useState(null);
+	const history = useHistory();
+        const [globalState,setGlobalState] = useContext(GlobalContext);
+	const form = useRef();
+
+	function send(e) {
+		e.preventDefault()
+		if (!error) {
+	 setLoading(true);
+		let elements = form.current.elements;
+            fetch("/signup",{
+		    method: "POST",
+             body: `firstname=${encodeURIComponent(elements["firstname"].value)}&lastname=${encodeURIComponent(elements["lastname"].value)}&email=${encodeURIComponent(elements["email"].value)}&password=${encodeURIComponent(elements["password"].value)}`,
+		    headers: {
+                     "Content-Type": "application/x-www-form-urlencoded"
+		    }
+	    }).then(res => {
+               return res.json();		   
+	    }).then(json => {
+              if (json.Status == "Success!") {
+                  setGlobalState({loggedIn: true, new: true,sets: 0,name: `${elements["firstname"]
+.value} ${elements["lastname"].value}`});
+               history.push("/verify");
+	      } else {
+                setError(json.Error);
+		setLoading(false);
+	      }
+	    })
+		}
+	}
+
+	function load() {
+          if (loading) {
+                return <div className="loading-button"></div>
+              }
+                 return "Submit";
+	}
+
  return (
   <main className="signup">
-      <form className="signup-box">
+     <form className="signup-box" ref={form} onSubmit={send}>
+        <Link to="/"><img src={logo} alt="logo" className="logo-img-2" /></Link> 
 	 <h1>Get Started!</h1>
 	 <Link to="/login" className="login-signup">I have an account!</Link>
 	 <br />
 	 <br />
-        <input type="text" name="firstname" placeholder="First Name" required />
+         <input onFocus={() => { setError(null) }} type="text" name="firstname" placeholder="First Name" required />
 	 <br />
-	<input type="text" name="lastname" placeholder="Last Name" required />
+	 <input onFocus={() => { setError(null) }} type="text" name="lastname" placeholder="Last Name" required />
 	 <br />
-	<input type="text" name="email" placeholder="Email" required />
+	 <input onFocus={() => { setError(null) }} type="text" name="email" placeholder="Email" required />
 	 <br />
-	<input type="password" name="password" placeholder="Password" required />
+	 <input onFocus={() => { setError(null) }} type="password" name="password" placeholder="Password" required />
 	 <br />
+	 <p className="error-message">{error}</p>
 	 <br />
-	<button type="submit">Submit</button>
+ 	 <button type="submit" style={{opacity: loading || error ? "0.6":"1"}}>{load()}</button>
 	 </form>
 	 </main>
  )

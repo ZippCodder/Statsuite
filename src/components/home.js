@@ -4,9 +4,10 @@ import "./home.css";
 import {Link,useHistory,useLocation} from "react-router-dom";
 
 export default function Home(props) {
-  let history = useHistory();
-	let location = useLocation();
-      history.replace(location.pathname);
+   let history = useHistory();
+	if (!history.location.state) {
+      history.replace(history.location.pathname,{initialized: true}); 
+	}
    return (
       <main className="home">
         <section className="intro">

@@ -1,0 +1,23 @@
+#not-found {
+height: 100vh;
+width: 100%;
+text-align: center;
+margin-top: 20vmin;
+}
+
+#not-found h1 {
+font-size: 7em;
+font-family: var(--maj-font);
+}
+
+#not-found p {
+ font-family: var(--min-font);
+ }
+
+ #not-found > a {
+   color: dodgerblue;
+   text-decoration: underline;
+   font-family: var(--min-font);
+ }
+
+

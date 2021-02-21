@@ -32,14 +32,14 @@ app.use("/static",express.static("build/static"));
 // Serve favicon...
 
 app.get("/favicon.ico",(req,res) => {
-  let img = fs.createReadStream(__dirname + "/logo.png");
+  /* let img = fs.createReadStream(__dirname + "/logo.png");
   img.on("open",() => {
     res.set("Content-Type","image/png");
    img.pipe(res); 
 })
 img.on("error",(err) => {
  res.send(err);
-})
+}) */
 res.set("Content-Type","image/svg+xml");
 res.sendFile(__dirname + "/src/logo.svg");
  })

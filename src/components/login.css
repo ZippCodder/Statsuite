@@ -59,4 +59,32 @@
 .login-signup {
  font-family: var(--min-font);
  color: dodgerblue;
+
+}
+
+.loading-button {
+ width: 20px;
+ height: 20px;
+ border-radius: 20px;
+ margin: auto;
+ border: 5px solid dodgerblue;
+ border-left: 5px solid white;
+ opacity: 0.6;
+ animation: rotate 0.3s linear infinite;
+}
+
+.error-message {
+ font-family: var(--min-font);
+ color: red;
+ font-size: 1em;
+}
+
+@keyframes rotate {
+ 0% {
+   transform: rotate(0deg);
+ }
+
+ 100% {
+  transform: rotate(360deg);
+ }
 }
