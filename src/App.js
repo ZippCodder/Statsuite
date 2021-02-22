@@ -45,12 +45,14 @@ class App extends Component {
 	    <Header />
             <Dashboard />
 	    </Route>
+            {/* 
+               @TODO: Uncomment to for email verification endpoints
             <Route path="/verify">
             <Verify />
             </Route>
             <Route path="/unauthenticated">
             <Unauthenticated />
-            </Route>
+            </Route> */}
             <Route path="/">
             <NotFound />                                            
 	    </Route>
