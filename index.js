@@ -41,15 +41,7 @@ app.use("/static",express.static("build/static"));
 // Serve favicon...
 
 app.get("/favicon.ico",(req,res) => {
- /* let img = fs.createReadStream(__dirname + "/logo.png");
-  img.on("open",() => {
-    res.set("Content-Type","image/png");
-   img.pipe(res); 
-})
-img.on("error",(err) => {
- res.send(err);
-}) */
-res.set("Content-Type","image/svg+xml");
+ res.set("Content-Type","image/svg+xml");
 res.sendFile(__dirname + "/src/logo.svg");
  })
 
@@ -139,16 +131,13 @@ app.post("/login",(req,res) => {
                    if (!err) {
                   client.db("Statsuite").collection("Users").findOne({email: userObj.email,password: hashedPassword},(err,data) => {
                         if (!err && data) {
-				if (data.verified) {
+          // @TODO: Include extra validation for weather or not the email address has been validated
                             let fullName = data.fullname.split(" ");
                                 let [firstName,lastName] = fullName;
                              let token = jwt.sign({firstname: firstName, lastname: lastName, email: userObj.email},secret);
 				send(req,res,{Status: "Success!", Token: token},200);
 				client.close();
-				} else {
-                              send(req,res,{Status: "Failure!", Error: "Could'nt sign in user, account has'nt been verified!"},400);
-				}
-			} else {
+	 			} else {
                       send(req,res,{Status: "Failure!",Error: "Could'nt sign in user, invalid user credentials!"},400);
 				client.close();
 			}
@@ -163,6 +152,8 @@ app.post("/login",(req,res) => {
 });
 
 // Verify an account...
+
+/* @TODO: Reactivate email verification once a domain name is set up
 
 app.post("/verify/:verificationId",(req,res) => {
 	let verifKey = req.params.verificationId;
@@ -188,10 +179,9 @@ app.post("/verify/:verificationId",(req,res) => {
     send(req,res,{Status: "Failure!",Error: "Could'nt verify user's account, verification ID was invalid!"},401);
      }
   });
-})
+}) */
 
-// Serve application...
-/*
+/* @TODO: uncomment to serve application in production...
 app.get("*",(req,res) => {
   res.sendFile(path.join(__dirname,"/build/index.html"));
 })
