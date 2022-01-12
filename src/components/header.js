@@ -56,7 +56,7 @@ localStorage.removeItem("name");
  return (
    <header className="header main-header">
    <div className="logos">
-    <img src={logo} alt="logo" className="logo-img"/>
+    <img src="https://zippcodder.github.io/Statsuite/build/static/media/logo.4fb0361a.svg" alt="logo" className="logo-img"/>
       <Link to="/" className="logo"><h1>Statsuite</h1></Link>
       </div>
 	 <nav className="desktop">
